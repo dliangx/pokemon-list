@@ -7,8 +7,6 @@ import { Pokemon, PokemonPear } from "@/types/PokemonDetail";
 import { PokemonType } from "@/types/PokemonTypes";
 import { useState } from "react";
 
-export const pageNum = 48;
-
 export default function Home() {
   const [types, setTypes] = useState<PokemonType[]>([]);
   const [typePokemonMap, setTypePokemonMap] = useState<Map<string, Pokemon[]>>(

@@ -2,12 +2,11 @@ import { AppContext } from "@/types/AppContext";
 import { useContext, useEffect, useState } from "react";
 import PokemonImage from "./PokemonImage";
 import { PokemonPear } from "@/types/PokemonDetail";
-import { pageNum } from "@/app/page";
 
 const ImageView = () => {
   const { images, totalPage, page, setPage } = useContext(AppContext);
   const [showImages, setShowImages] = useState<PokemonPear[]>([]);
-
+  const pageNum = 48;
   useEffect(() => {
     setShowImages(images.slice(pageNum * page, pageNum * (page + 1)));
   }, [totalPage, page, images]);
