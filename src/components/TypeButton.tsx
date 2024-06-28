@@ -9,10 +9,13 @@ const TypesButton = (props: { name: string; index: number }) => {
     setClickButtons,
     allImagesMap,
     setImages,
+    setPage,
+    setTotalPage,
     types,
     typePokemonMap,
   } = useContext(AppContext);
   const [isclicked, setIsclicked] = useState(false);
+
   return (
     <button
       className={`px-2 py-2 mx-2 my-2 border-red-900 border-2 rounded-md font-bold 
@@ -29,6 +32,7 @@ const TypesButton = (props: { name: string; index: number }) => {
         setClickButtons(clicks);
         let maps = allImagesMap;
         let names: string[] | undefined = [];
+
         maps.forEach((_, key) => {
           names?.push(key);
         });
@@ -44,6 +48,9 @@ const TypesButton = (props: { name: string; index: number }) => {
             names = names.filter((v) => onames?.includes(v));
           }
         }
+        if (clicks.length == 0) {
+          names.splice(1200, 1000);
+        }
         console.log(names);
         let imgs: PokemonPear[] = [];
         if (names != undefined) {
@@ -55,6 +62,8 @@ const TypesButton = (props: { name: string; index: number }) => {
             }
           }
           setImages(imgs);
+          setPage(0);
+          setTotalPage(Math.round(imgs.length / 48));
         }
       }}
     >

@@ -84,7 +84,7 @@ const TypesView = () => {
           }
           setAllImagesMap(map);
           setPage(0);
-          setTotalPage(data.results.length / 48);
+          setTotalPage(Math.round(data.results.length / 48));
         })
         .catch((error) => {
           console.log(error);

@@ -35,7 +35,7 @@ const ImageView = () => {
           </button>
           <button
             className={`p-2 ml-2 bg-red-900 rounded-md text-white disabled:opacity-40 disabled:cursor-not-allowed select-none`}
-            disabled={page == totalPage - 1 ? true : false}
+            disabled={page >= totalPage - 1 ? true : false}
             onClick={() => {
               if (page < totalPage - 1) {
                 setPage(page + 1);
