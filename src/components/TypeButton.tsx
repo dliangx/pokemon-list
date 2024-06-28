@@ -1,9 +1,17 @@
 import { AppContext } from "@/types/AppContext";
+import { Pokemon, PokemonPear } from "@/types/PokemonDetail";
 import { PokemonType } from "@/types/PokemonTypes";
 import { useContext, useState } from "react";
 
 const TypesButton = (props: { name: string; index: number }) => {
-  const { clickButtons, setClickButtons } = useContext(AppContext);
+  const {
+    clickButtons,
+    setClickButtons,
+    allImagesMap,
+    setImages,
+    types,
+    typePokemonMap,
+  } = useContext(AppContext);
   const [isclicked, setIsclicked] = useState(false);
   return (
     <button
@@ -14,10 +22,40 @@ const TypesButton = (props: { name: string; index: number }) => {
       onClick={() => {
         isclicked ? setIsclicked(false) : setIsclicked(true);
         let clicks = clickButtons;
+        let clickIndex = clicks.indexOf(props.index);
         clicks.includes(props.index)
-          ? clicks.splice(clicks.indexOf(props.index))
+          ? clicks.splice(clickIndex, 1)
           : clicks.push(props.index);
         setClickButtons(clicks);
+        let maps = allImagesMap;
+        let names: string[] | undefined = [];
+        maps.forEach((_, key) => {
+          names?.push(key);
+        });
+
+        for (let index = 0; index < clicks.length; index++) {
+          const element = clicks[index];
+
+          var plist = typePokemonMap.get(types[element].name);
+          var onames = plist?.map((p) => {
+            return p.pokemon.name;
+          });
+          if (names != undefined && onames != undefined) {
+            names = names.filter((v) => onames?.includes(v));
+          }
+        }
+        console.log(names);
+        let imgs: PokemonPear[] = [];
+        if (names != undefined) {
+          for (let index = 0; index < names.length; index++) {
+            const element = names[index];
+            var url = maps.get(element);
+            if (url != undefined) {
+              imgs.push({ name: element, url: url });
+            }
+          }
+          setImages(imgs);
+        }
       }}
     >
       {props.name}

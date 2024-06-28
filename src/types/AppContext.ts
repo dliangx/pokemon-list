@@ -7,6 +7,8 @@ export interface AppContextType {
   setTypes: any;
   typePokemonMap: Map<string, Pokemon[]>;
   setTypePokemonMap: any;
+  allImagesMap: Map<string, string>;
+  setAllImagesMap: any;
   images: PokemonPear[];
   setImages: any;
   clickButtons: number[];
@@ -22,6 +24,8 @@ export const AppContext = createContext<AppContextType>({
   setTypes: null,
   typePokemonMap: new Map(),
   setTypePokemonMap: null,
+  allImagesMap: new Map(),
+  setAllImagesMap: null,
   images: [],
   setImages: null,
   clickButtons: [],

@@ -10,6 +10,8 @@ const TypesView = () => {
     types,
     setTypes,
     setTypePokemonMap,
+    allImagesMap,
+    setAllImagesMap,
     setImages,
     setTotalPage,
     setPage,
@@ -64,7 +66,7 @@ const TypesView = () => {
 
   useEffect(() => {
     if (types.length == 0) {
-      const url = "https://pokeapi.co/api/v2/pokemon?limit=1200";
+      const url = "https://pokeapi.co/api/v2/pokemon?limit=10000";
       fetch(url, {
         method: "GET",
         headers: {
@@ -74,8 +76,13 @@ const TypesView = () => {
         .then((respones) => respones.json())
         .then((data) => {
           console.log(data.results);
-          setImages(data.results);
-
+          setImages(data.results.slice(0, 1200));
+          let map: Map<string, string> = new Map();
+          for (let index = 0; index < data.results.length; index++) {
+            const element = data.results[index];
+            map.set(element.name, element.url);
+          }
+          setAllImagesMap(map);
           setPage(0);
           setTotalPage(data.results.length / 48);
         })
@@ -83,7 +90,7 @@ const TypesView = () => {
           console.log(error);
         });
     }
-  }, [types, setImages, setPage, setTotalPage]);
+  }, [types, setImages, setAllImagesMap, setPage, setTotalPage]);
 
   return (
     <div className="flex items-center mx-4 my-4">

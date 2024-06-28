@@ -14,6 +14,9 @@ export default function Home() {
   const [typePokemonMap, setTypePokemonMap] = useState<Map<string, Pokemon[]>>(
     new Map()
   );
+  const [allImagesMap, setAllImagesMap] = useState<Map<string, string>>(
+    new Map()
+  );
   const [images, setImages] = useState<PokemonPear[]>([]);
   const [clickButtons, setClickButtons] = useState<number[]>([]);
   const [totalPage, setTotalPage] = useState<number>(0);
@@ -26,6 +29,8 @@ export default function Home() {
         setTypes,
         typePokemonMap,
         setTypePokemonMap,
+        allImagesMap,
+        setAllImagesMap,
         images,
         setImages,
         clickButtons,
